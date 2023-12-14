@@ -1,0 +1,21 @@
+- hosts: all
+  become: true
+
+  tasks:
+
+    - name: test connectivity
+      ping:
+
+    - name: Update index repository
+      apt:
+        update_cache: yes
+
+    - name: Install apache2 package
+      apt:
+        name: apache2
+        state: latest
+
+    - name: Add php support for apache2
+      apt:
+        name: libapache2-mod-php
+        state: latest
