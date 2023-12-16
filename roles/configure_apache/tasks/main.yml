@@ -3,7 +3,7 @@
 - name: Install apache2 package
   tags: apache2, ubuntu, apache
   apt:
-    name: apache2
+    name: "{{ apache_package_name }}"
     state: latest
   when: ansible_distribution == "Ubuntu"
 
@@ -11,7 +11,7 @@
 - name: Add php support for apache2
   tags: apache2, ubuntu, apache
   apt:
-    name: libapache2-mod-php
+    name: "{{ php_package_name }}"
     state: latest
   when: ansible_distribution == "Ubuntu"
 

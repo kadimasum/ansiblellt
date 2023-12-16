@@ -1,2 +1,4 @@
 ---
 # vars file for configure_apache
+apache_package_name: apache2
+php_package_name: libapache2-mod-php
