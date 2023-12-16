@@ -1,0 +1,12 @@
+Log created: 2023-12-15T08:06:21.978280000Z
+Process ID:  65334 (0xff36)
+Parent PID:  1566 (0x61e)
+Executable:  /usr/lib/virtualbox/VBoxHeadless
+Arg[0]: /usr/lib/virtualbox/VBoxHeadless
+Arg[1]: --comment
+Arg[2]: ansiblellt_srv1_1702490838532_18352
+Arg[3]: --startvm
+Arg[4]: f23c4550-b8c4-4a0c-ac94-b95e7b95e508
+Arg[5]: --vrde
+Arg[6]: config
+AddRef: illegal refcnt=3221225469 state=2
