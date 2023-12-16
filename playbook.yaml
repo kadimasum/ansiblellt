@@ -16,66 +16,8 @@
 
 - hosts: all
   become: true
-
-  tasks:
-
-    - name: Creare user simone
-      tags: always
-      user: 
-        name: simone
-        groups: root
-
-    - name: Add ssh key for simone
-      tags: always
-      authorized_key: 
-        user: simone
-        key: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDQuvDQcmge0KiZV9e4ZmcHYEz4t0mfXB5gauZ6eytf0NLX5JQczfljFgGRdiTntRm1NTX86ksjDZAZQaopi0iqgmPEtyb5ncL0ukYJ1A3n7rKnSnS+XBfjnXj/EwgOt6QpkC8Y2ra23AeA2bATqQ3KCrUpysZ6pbn00D5CS9ZE4ZLIAVB/jvm8BRr5Im7IDzl9ZBzFzCc18BoVtGjSaySSNmSSOfn8y/Iuty0AuOHakPcXCdRCQtQYBEEnDP7o76pyvbYWacgResTEB1fQxlmXeLEZLURHK2NOZAY4g6iw0yB71RcQkHaomaf9aGPpx4tacnD6SMbxQ6fLhysSLFe5WdurxchvgrgfjXpmTMHzn+tFB/NGNEY4UUIDcO93iB3Hb95jh9Y0SonVVH3HOv//7YD45lxVmTyIN68Aw3xwKOKRoxXeQNjqs1jsLX07DNvFE1STvKCj6VkyGT33XHKfYxGqbR1OSwSPGNV1I8Epu9saTyAxp882pW8v2GRRYiM= sam@sam-ThinkPad-T480s"
-    
-    - name: Add sudoers file for simone
-      tags: always
-      copy:
-        src: sudoer_simone
-        dest: /etc/sudoers.d/simone
-        owner: root
-        group: root
-        mode: 0440
-
-      
-
-    - name: Install apache2 package
-      tags: apache2, ubuntu, apache
-      apt:
-        name: apache2
-        state: latest
-      when: ansible_distribution == "Ubuntu"
-
-
-    - name: Add php support for apache2
-      tags: apache2, ubuntu, apache
-      apt:
-        name: libapache2-mod-php
-        state: latest
-      when: ansible_distribution == "Ubuntu"
-
-    - name: Copy default html file to ubuntu vm
-      tags: ubuntu, copy, html, apache
-      copy:
-        src: default_site.html
-        dest: /var/www/html/index.html
-        owner: root
-        group: root
-        mode: 0644
-
-
-    - name: Install unzip
-      apt: 
-        name: unzip 
-        state: present
-
-    - name: Install terraform
-      ansible.builtin.unarchive:
-        src: https://releases.hashicorp.com/terraform/1.6.6/terraform_1.6.6_linux_amd64.zip
-        dest: /usr/local/bin
-        remote_src: yes
-
+  roles:
+    - create_user
+    - configure_apache
+    - setup_terraform 
     
