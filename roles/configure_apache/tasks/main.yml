@@ -1,0 +1,25 @@
+---
+# tasks file for configure_apache
+- name: Install apache2 package
+  tags: apache2, ubuntu, apache
+  apt:
+    name: apache2
+    state: latest
+  when: ansible_distribution == "Ubuntu"
+
+
+- name: Add php support for apache2
+  tags: apache2, ubuntu, apache
+  apt:
+    name: libapache2-mod-php
+    state: latest
+  when: ansible_distribution == "Ubuntu"
+
+- name: Copy default html file to ubuntu vm
+  tags: ubuntu, copy, html, apache
+  copy:
+    src: default_site.html
+    dest: /var/www/html/index.html
+    owner: root
+    group: root
+    mode: 0644
